@@ -1,0 +1,47 @@
+Sources & Credits for binary files
+
+1:	7-Zip 18.05 (x64) : Copyright (c) 1999-2018 Igor Pavlov : 2018-04-30
+	https://www.7-zip.org/a/7z1805-x64.exe
+	
+2:	bootimg : liudongmiao
+	https://github.com/liudongmiao/bootimg
+	
+3:	brotly : Google inc.
+	https://github.com/google/brotli/releases/download/v1.0.4/brotli-v1.0.4-win_x86_64.zip
+	
+4:	busybox-standalone, find, gawk and dll's : cygwin project
+	https://cygwin.com/
+	
+5:	cecho v2.0 : by thomas_polaert@yahoo.fr
+	https://www.codeproject.com/Articles/17033/Add-Colors-to-Batch-Files
+
+6: 	dos2unix v7.4.0:  by Benjamin Lin
+	https://waterlan.home.xs4all.nl/dos2unix/dos2unix-7.4.0-win32.zip
+	
+7:	ext2simg : Google inc. compiled by A.S._id
+	https://forum.xda-developers.com/showpost.php?p=49235638&postcount=5
+	
+8:	Imgextractor : by And_pda
+	http://4pda.ru/forum/index.php?showtopic=496786&view=findpost&p=38004733
+	
+9:	make_ext4fs.exe : by Google inc. compiled by  @foquanlin, @superr, @nkk71 and @Nevax07
+	https://github.com/jamflux/make_ext4fs
+	
+10:	sdat2img : by xpirt
+	https://github.com/xpirt/sdat2img
+	
+11:	sefcontext_decompile : wuxianlin
+	https://github.com/wuxianlin/sefcontext_decompile
+	
+12:	simg2sdat : by xpirt and patched by blackeangel
+	https://github.com/xpirt/img2sdat
+	https://github.com/blackeangel/img2sdat/tree/patch-1
+	
+13:	pyinstaller v3.3.1 : py installer project
+	https://www.pyinstaller.org/downloads.html
+	
+14:	assayyed kitchen : by Assayyed at xda developers | For ideas and batchscript codes
+	https://forum.xda-developers.com/chef-central/android/best-android-roms-editor-assayyedkitchen-t3410545
+	
+15:	python v3.6.6 : python developer
+	https://www.python.org/downloads/release/python-366/
