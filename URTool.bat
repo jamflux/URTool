@@ -1,13 +1,13 @@
 @shift /0
-@shift /0
 @echo OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
-SET APP_NAME=UR-Tool Prime v1.6 semi-stable
+SET APP_NAME=UR-Tool Prime v1.7 semi-stable
 SET AUTHORS=[by JamFlux]
 SET APP_DESCRIPTION=Extract and Repack system formats on android 5-8.1
 set CYGWIN=nodosfilewarning
 SET Cecho=bins\cecho.exe
 SET busybox=bins\busybox.exe
+set imgextractor="bins\ImgExtractor.exe"
 TITLE %APP_NAME% %AUTHORS%
 
 
@@ -421,11 +421,10 @@ echo.
 echo.
 if not exist 01-Project\system mkdir 01-Project\system
 :: ---> This is for extract system.img using 7z,  this puts wrong symlinks format, so better is use into system folder zip ROM
-::bins\7z x -y "01-Project\1-Sources\system.img" -o"01-Project\system" >nul 2>nul
-::rmdir /q /s 01-Project\system\[SYS] >nul
+bins\7z x -y "01-Project\1-Sources\system.img" -o"01-Project\system" >nul 2>nul
+rmdir /q /s 01-Project\system\[SYS] >nul
 :: <---
-::Extraction with ImgExtractor by And_PDA. Symlinks are well formed for stock formats images like .new.dat, .img or dat.br
-if exist 01-Project\1-Sources\system.img bins\ImgExtractor 01-Project\1-Sources\system.img 01-Project\system >nul
+call :img_extractor
 cls
 echo.
 echo.
@@ -983,6 +982,18 @@ goto:eof
 :Detect_system_size
 FOR %%A IN ("01-Project\1-Sources"\system.img) DO SET SIZE=%%~zA
 ::for %%A in (%peso%) do if %%~zA==0 (goto Peso_w10) else (goto:eof)
+goto:eof
+
+:img_extractor
+IF EXIST 01-Project\1-Sources\system.img (
+"%imgextractor%" 01-Project\1-Sources\system.img 01-Project\system > nul
+)
+ECHO.
+ECHO.+----------------------------------------------------+
+ECHO.+            Done. Symlinks were downloaded          +
+ECHO.+                         Enjoy                      +
+ECHO.+----------------------------------------------------+
+ECHO.
 goto:eof
 
 
