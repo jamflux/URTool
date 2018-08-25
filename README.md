@@ -1,4 +1,4 @@
-# ![logo](https://i.imgur.com/667keiZ.png)
+# ![logo](https://i.imgur.com/wBP4MMa.png)
 
 # URTool
 URTool Extract and Repack android images from 5-8.1 (BIN,IMG,DAT-BR) Under Windows environment
