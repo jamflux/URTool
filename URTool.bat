@@ -1,3 +1,4 @@
+::DISCLAIMER: this tool can be used for free, the credits to JamFlux and other authors must be visible where the ROM has been published
 @shift /0
 @echo OFF
 SETLOCAL ENABLEDELAYEDEXPANSION

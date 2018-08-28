@@ -45,3 +45,6 @@ Sources & Credits for binary files
 	
 15:	python v3.6.6 : python developer
 	https://www.python.org/downloads/release/python-366/
+	
+16:	zipalign : Google inc
+	https://android.googlesource.com/platform/prebuilts/sdk/+/android-8.1.0_r43/tools/windows/bin
