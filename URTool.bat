@@ -1,7 +1,7 @@
 @shift /0
 @echo OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
-SET APP_NAME=UR-Tool Prime v1.7 semi-stable
+SET APP_NAME=UR-Tool Prime v1.8 semi-stable
 SET AUTHORS=[by JamFlux]
 SET APP_DESCRIPTION=Extract and Repack system formats on android 5-8.1
 set CYGWIN=nodosfilewarning
@@ -228,8 +228,8 @@ if exist 01-Project\1-Sources\vendor.new.dat bins\sdat2img 01-Project\1-Sources\
 if exist 01-Project\1-Sources\vendor.img bins\ImgExtractor 01-Project\1-Sources\vendor.img 01-Project\vendor >nul
 call :Detect_vendor_size
 call :write_vendor_symlinks
-if exist 01-Project\1-Sources\vendor.new.dat.br del 01-Project\1-Sources\vendor.new.dat.br >nul
-if exist 01-Project\1-Sources\vendor.new.dat del 01-Project\1-Sources\vendor.new.dat >nul
+if exist 01-Project\1-Sources\vendor.new.dat.br !busybox! rm -rf 01-Project\1-Sources\vendor.new.dat.br >nul
+if exist 01-Project\1-Sources\vendor.new.dat !busybox! rm -rf 01-Project\1-Sources\vendor.new.dat >nul
 goto next
 
 
@@ -325,8 +325,8 @@ echo.
 echo.
 if exist 01-Project\1-Sources\payload_input rmdir /q /s 01-Project\1-Sources\payload_input >nul 2>nul
 if exist 01-Project\1-Sources\payload_output rmdir /q /s 01-Project\1-Sources\payload_output >nul 2>nul
-if exist 01-Project\1-Sources\payload_dumper.exe del 01-Project\1-Sources\payload_dumper.exe >nul 2>nul
-if exist 01-Project\1-Sources\payload_dumper.bat del 01-Project\1-Sources\payload_dumper.bat >nul 2>nul
+if exist 01-Project\1-Sources\payload_dumper.exe !busybox! rm -rf 01-Project\1-Sources\payload_dumper.exe >nul 2>nul
+if exist 01-Project\1-Sources\payload_dumper.bat !busybox! rm -rf 01-Project\1-Sources\payload_dumper.bat >nul 2>nul
 TIMEOUT /T 2 /nobreak > NUL
 goto Extract_SYS
 
@@ -385,8 +385,8 @@ echo.
 %cecho% *          Unpacking {0a}!format!{#} format...
 echo.
 bins\sdat2img 01-Project\1-Sources\system.transfer.list 01-Project\1-Sources\system.new.dat 01-Project\1-Sources\system.img >nul
-if exist 01-Project\1-Sources\system.new.dat.br del 01-Project\1-Sources\system.new.dat.br >nul 2>nul
-if exist 01-Project\1-Sources\system.new.dat del 01-Project\1-Sources\system.new.dat >nul 2>nul
+if exist 01-Project\1-Sources\system.new.dat.br !busybox! rm -rf 01-Project\1-Sources\system.new.dat.br >nul 2>nul
+if exist 01-Project\1-Sources\system.new.dat !busybox! rm -rf 01-Project\1-Sources\system.new.dat >nul 2>nul
 TIMEOUT /T 1 /nobreak > NUL
 goto Extract_SYS
 
@@ -425,6 +425,7 @@ bins\7z x -y "01-Project\1-Sources\system.img" -o"01-Project\system" >nul 2>nul
 rmdir /q /s 01-Project\system\[SYS] >nul
 :: <---
 call :img_extractor
+call :Remove_pics_with_spaces
 cls
 echo.
 echo.
@@ -455,17 +456,17 @@ if not exist 01-Project\1-Sources\file_contexts call :File_Context_converter >nu
 ::This part for grabbing symlinks and permissions was adapted from assayyed kitchen batch-script code. Thanks to Assayyed.
 call :write_sys_symlinks
 call :write_sys_permissions
-if exist 01-Project\1-Sources\not_recursive del 01-Project\1-Sources\not_recursive >nul
-if exist 01-Project\1-Sources\permissions_sorted del 01-Project\1-Sources\permissions_sorted >nul
-if exist 01-Project\1-Sources\recursive del 01-Project\1-Sources\recursive >nul
-if exist 01-Project\1-Sources\rom_permissions del 01-Project\1-Sources\rom_permissions >nul
-if exist 01-Project\1-Sources\system_contexts del 01-Project\1-Sources\system_contexts >nul
+if exist 01-Project\1-Sources\not_recursive !busybox! rm -rf 01-Project\1-Sources\not_recursive >nul
+if exist 01-Project\1-Sources\permissions_sorted !busybox! rm -rf 01-Project\1-Sources\permissions_sorted >nul
+if exist 01-Project\1-Sources\recursive !busybox! rm -rf 01-Project\1-Sources\recursive >nul
+if exist 01-Project\1-Sources\rom_permissions !busybox! rm -rf 01-Project\1-Sources\rom_permissions >nul
+if exist 01-Project\1-Sources\system_contexts !busybox! rm -rf 01-Project\1-Sources\system_contexts >nul
 call :Detect_vendor_size
 echo %SIZE%>>01-Project\1-Sources\sys_size.txt
 echo.
 if exist 01-Project\vendor echo %VSIZE%>>01-Project\1-Sources\vend_size.txt
-if exist 01-Project\1-Sources\vendor.img del 01-Project\1-Sources\vendor.img >nul
-if exist 01-Project\1-Sources\vendor.transfer.list del 01-Project\1-Sources\vendor.transfer.list >nul
+if exist 01-Project\1-Sources\vendor.img !busybox! rm -rf 01-Project\1-Sources\vendor.img >nul
+if exist 01-Project\1-Sources\vendor.transfer.list !busybox! rm -rf 01-Project\1-Sources\vendor.transfer.list >nul
 echo.
 cls
 echo.
@@ -492,8 +493,8 @@ echo.
 %cecho% *          Done, see {0a}01-Project\system{#} folder.
 echo.
 echo.
-if exist 01-Project\1-Sources\system.img del 01-Project\1-Sources\system.img >nul 2>nul
-if exist 01-Project\1-Sources\system.transfer.list del 01-Project\1-Sources\system.transfer.list >nul 2>nul
+if exist 01-Project\1-Sources\system.img !busybox! rm -rf 01-Project\1-Sources\system.img >nul 2>nul
+if exist 01-Project\1-Sources\system.transfer.list !busybox! rm -rf 01-Project\1-Sources\system.transfer.list >nul 2>nul
 if not exist 01-Project\1-Sources\file_contexts call :File_Context_converter >nul 2>nul
 TIMEOUT /T 3 /nobreak > NUL
 cd 01-Project/1-Sources
@@ -530,12 +531,12 @@ cd ..\..
 move /y 01-Project\1-Sources\initrd\file_contexts 01-Project\1-Sources >nul 2>nul
 move /y 01-Project\1-Sources\initrd\file_contexts.bin 01-Project\1-Sources >nul 2>nul
 if exist 01-Project\1-Sources\initrd rmdir /q /s 01-Project\1-Sources\initrd >nul 2>nul
-if exist 01-Project\1-Sources\bootimg.exe del 01-Project\1-Sources\bootimg.exe >nul 2>nul
-if exist 01-Project\1-Sources\bootimg.json del 01-Project\1-Sources\bootimg.json >nul 2>nul
-if exist 01-Project\1-Sources\*.gz del 01-Project\1-Sources\*.gz >nul 2>nul
-if exist 01-Project\1-Sources\cpiolist.txt del 01-Project\1-Sources\cpiolist.txt >nul 2>nul
-if exist 01-Project\1-Sources\kernel.gz.dt del 01-Project\1-Sources\kernel.gz.dt >nul 2>nul
-if exist 01-Project\1-Sources\unknown del 01-Project\1-Sources\unknown >nul 2>nul
+if exist 01-Project\1-Sources\bootimg.exe !busybox! rm -rf 01-Project\1-Sources\bootimg.exe >nul 2>nul
+if exist 01-Project\1-Sources\bootimg.json !busybox! rm -rf 01-Project\1-Sources\bootimg.json >nul 2>nul
+if exist 01-Project\1-Sources\*.gz !busybox! rm -rf 01-Project\1-Sources\*.gz >nul 2>nul
+if exist 01-Project\1-Sources\cpiolist.txt !busybox! rm -rf 01-Project\1-Sources\cpiolist.txt >nul 2>nul
+if exist 01-Project\1-Sources\kernel.gz.dt !busybox! rm -rf 01-Project\1-Sources\kernel.gz.dt >nul 2>nul
+if exist 01-Project\1-Sources\unknown !busybox! rm -rf 01-Project\1-Sources\unknown >nul 2>nul
 goto:eof
 ::Till here<---
 
@@ -587,6 +588,7 @@ FOR /F "Tokens=2* Delims==" %%# In (
 ) Do (
     SET "release=%%#"
 )
+call :zipalign
 cls
 echo.
 echo.
@@ -612,8 +614,36 @@ echo.
 %cecho% *          Repacking to: {0a}!format!{#} format...
 echo.
 if not exist 01-Project\2-New_system mkdir 01-Project\2-New_system >nul
-if exist 01-Project\vendor bins\make_ext4fs -L vendor -T 0 -S 01-Project\1-Sources\file_contexts -l %VSIZE% -a vendor 01-Project\2-New_system\vendor_ext4.img 01-Project\vendor\ >nul 2>nul
-bins\make_ext4fs -L system -T 0 -S 01-Project\1-Sources\file_contexts -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+if exist 01-Project\vendor bins\make_ext4fs -L vendor -T 2009110000 -S 01-Project\1-Sources\file_contexts -l %VSIZE% -a vendor 01-Project\2-New_system\vendor_ext4.img 01-Project\vendor\ >nul 2>nul
+bins\make_ext4fs -L system -T 2009110000 -S 01-Project\1-Sources\file_contexts -C 01-Project\1-Sources\fs_config -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+FOR %%B IN ("01-Project\2-New_system\system_ext4.img") DO SET SIZE2=%%~zB
+echo %SIZE2% >> 01-Project\1-Sources\sys_size2.txt
+if %SIZE2%==0 (goto no_fs_config) else (goto decide_format)
+:decide_format
+cls
+echo.
+echo.
+echo 	   ".##..##.#####.........######..####...####..##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   ".##..##.#####..######...##...##..##.##..##.##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   "..####..##..##..........##....####...####..######.";
+echo 	   "..................................................";
+echo.
+%cecho%            Android version: {0a}!release!{#}                     {03}by JamFlux{#}
+echo.
+echo.
+echo            *****************************************************
+%cecho% *          Working with {0b}!format!{#} ROM:
+echo.
+%cecho% *          {0b}!file!{#}
+echo.
+echo            *****************************************************
+echo.
+echo.
+echo.
+%cecho% *          Repacking to: {0a}!format!{#} format...
+echo.
 if "!format!"=="payload.bin" (goto Repack_IMG) else goto next_1.1
 :next_1.1
 cls
@@ -625,7 +655,7 @@ if "!format!"=="system.new.dat" (goto re_pack_dat) else goto next_3.1
 cls
 if "!format!"=="system.img" (goto Repack_IMG) else goto not_supported
 goto:eof
-del 01-Project\1-Sources\system.img
+if exist 01-Project\1-Sources\system.img !busybox! rm -rf 01-Project\1-Sources\system.img > nul
 
 
 ::Pixel and mi a1 system images, double system slot
@@ -636,6 +666,7 @@ FOR /F "Tokens=2* Delims==" %%# In (
 ) Do (
     SET "release=%%#"
 )
+call :zipalign
 cls
 echo.
 echo.
@@ -661,8 +692,12 @@ echo.
 %cecho% *          Repacking to: {0a}system.img{#} format...
 echo.
 if not exist 01-Project\2-New_system mkdir 01-Project\2-New_system >nul
-if exist 01-Project\vendor bins\make_ext4fs -L vendor -T 0 -S 01-Project\1-Sources\file_contexts -l %VSIZE% -a vendor 01-Project\2-New_system\vendor_ext4.img 01-Project\vendor\ >nul 2>nul
-bins\make_ext4fs -L system -T 0 -S 01-Project\1-Sources\file_contexts -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+if exist 01-Project\vendor bins\make_ext4fs -L vendor -T 2009110000 -S 01-Project\1-Sources\file_contexts -l %VSIZE% -a vendor 01-Project\2-New_system\vendor_ext4.img 01-Project\vendor\ >nul 2>nul
+bins\make_ext4fs -L system -T 2009110000 -S 01-Project\1-Sources\file_contexts -C 01-Project\1-Sources\fs_config -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+FOR %%B IN ("01-Project\2-New_system\system_ext4.img") DO SET SIZE2=%%~zB
+echo %SIZE2% >> 01-Project\1-Sources\sys_size2.txt
+if %SIZE2%==0 (goto no_fs_config_AB) else (goto decide_format2)
+:decide_format2
 cls
 echo.
 echo.
@@ -731,8 +766,8 @@ bins\brotli.exe -6 -j -w 24 01-Project\2-New_system\system.new.dat >nul 2>nul
 TIMEOUT /T 3 /nobreak >nul
 bins\brotli.exe -6 -j -w 24 01-Project\2-New_system\vendor.new.dat >nul 2>nul
 TIMEOUT /T 3 /nobreak >nul
-if exist 01-Project\2-New_system\system_ext4.img del 01-Project\2-New_system\system_ext4.img
-if exist 01-Project\2-New_system\vendor_ext4.img del 01-Project\2-New_system\vendor_ext4.img
+if exist 01-Project\2-New_system\system_ext4.img !busybox! rm -rf 01-Project\2-New_system\system_ext4.img
+if exist 01-Project\2-New_system\vendor_ext4.img !busybox! rm -rf 01-Project\2-New_system\vendor_ext4.img
 cls
 echo.
 echo.
@@ -797,7 +832,7 @@ TIMEOUT /T 3 /nobreak >nul
 if exist 01-Project\2-New_system\vendor.img bins\simg2sdat 01-Project\2-New_system\vendor.img 01-Project\2-New_system >nul
 TIMEOUT /T 3 /nobreak >nul
 call :Just_Touch
-if exist 01-Project\2-New_system\system_ext4.img del 01-Project\2-New_system\system_ext4.img
+if exist 01-Project\2-New_system\system_ext4.img !busybox! rm -rf 01-Project\2-New_system\system_ext4.img >nul
 cls
 echo.
 echo.
@@ -987,14 +1022,119 @@ goto:eof
 :img_extractor
 IF EXIST 01-Project\1-Sources\system.img (
 "%imgextractor%" 01-Project\1-Sources\system.img 01-Project\system > nul
+if exist 01-Project\system_statfile.txt move /y 01-Project\system_statfile.txt 01-Project\1-Sources\fs_config >nul 2>nul
 )
-ECHO.
-ECHO.+----------------------------------------------------+
-ECHO.+            Done. Symlinks were downloaded          +
-ECHO.+                         Enjoy                      +
-ECHO.+----------------------------------------------------+
-ECHO.
 goto:eof
+
+:Remove_pics_with_spaces
+for /R %%j in (*.png*) do (
+set filename=%%~nj
+set filename=!filename:.=_!
+set filename=!filename: =_!
+if not "!filename!"=="%%~nj" del "%%j" > nul
+)
+for /R %%k in (*.jpg*) do (
+set filename=%%~nk
+set filename=!filename:.=_!
+set filename=!filename: =_!
+if not "!filename!"=="%%~nk" del "%%k" > nul
+)
+goto:eof
+
+:no_fs_config
+cls
+echo.
+echo.
+echo 	   ".##..##.#####.........######..####...####..##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   ".##..##.#####..######...##...##..##.##..##.##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   "..####..##..##..........##....####...####..######.";
+echo 	   "..................................................";
+echo.
+%cecho%            Android version: {0a}!release!{#}                     {03}by JamFlux{#}
+echo.
+echo.
+echo            *****************************************************
+%cecho% *          Working with {0b}!format!{#} ROM:
+echo.
+%cecho% *          {0b}!file!{#}
+echo.
+echo            *****************************************************
+echo.
+echo.
+echo.
+%cecho% *          Repacking to: {0a}!format!{#} format...
+echo.
+if exist 01-Project\2-New_system rmdir /q /s 01-Project\2-New_system >nul
+if not exist 01-Project\2-New_system mkdir 01-Project\2-New_system >nul
+bins\make_ext4fs -L system -T 2009110000 -S 01-Project\1-Sources\file_contexts -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+goto decide_format
+
+
+:no_fs_config_AB
+cls
+echo.
+echo.
+echo 	   ".##..##.#####.........######..####...####..##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   ".##..##.#####..######...##...##..##.##..##.##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   "..####..##..##..........##....####...####..######.";
+echo 	   "..................................................";
+echo.
+%cecho%            Android version: {0a}!release!{#}                     {03}by JamFlux{#}
+echo.
+echo.
+echo            *****************************************************
+%cecho% *          Working with {0b}!format!{#} ROM:
+echo.
+%cecho% *          {0b}!file!{#}
+echo.
+echo            *****************************************************
+echo.
+echo.
+echo.
+%cecho% *          Repacking to: {0a}!format!{#} format...
+echo.
+if exist 01-Project\2-New_system rmdir /q /s 01-Project\2-New_system >nul
+if not exist 01-Project\2-New_system mkdir 01-Project\2-New_system >nul
+bins\make_ext4fs -L system -T 2009110000 -S 01-Project\1-Sources\file_contexts -l %SIZE% -a system 01-Project\2-New_system\system_ext4.img 01-Project\system\ >nul 2>nul
+goto decide_format2
+
+
+:zipalign
+:: Batch file to recursively zip align *.apk files in a directory
+:: and its sub-directories. This is significantly easier and faster
+:: than manually zip aligning them.
+cls
+echo.
+echo.
+echo 	   ".##..##.#####.........######..####...####..##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   ".##..##.#####..######...##...##..##.##..##.##.....";
+echo 	   ".##..##.##..##..........##...##..##.##..##.##.....";
+echo 	   "..####..##..##..........##....####...####..######.";
+echo 	   "..................................................";
+echo.
+%cecho%            Android version: {0a}!release!{#}                     {03}by JamFlux{#}
+echo.
+echo.
+echo            *****************************************************
+%cecho% *          Working with {0b}!format!{#} ROM:
+echo.
+%cecho% *          {0b}!file!{#}
+echo.
+echo            *****************************************************
+echo.
+echo.
+echo.
+%cecho% *          {0a}Zipaligning{#} applications...
+echo.
+for /R %%X in (*.apk) do bins\zipalign -f 4 "%%X" "%%~dpX%%~nX.new"
+for /R %%X in (*.new) do move /Y "%%X" "%%~dpX%%~nX.apk" >nul 2>nul
+goto:eof
+
 
 
 :Exit
